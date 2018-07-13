@@ -1,2 +1,2 @@
 # EmptyClientAndroidApp
-App created for one of the subjects I am tutoring for students to fill during the semester.
+App created for one of the subjects I am tutoring. Students will fill this app during the semester.
