@@ -1,7 +1,6 @@
 package yourteamnumber.seshealthpatient.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,12 +23,6 @@ import yourteamnumber.seshealthpatient.R;
  * creating an empty Log In activity for you to fill in the details of how your log in is
  * gonna work. Please, Modify Accordingly!
  * <p>
- * ___
- * _.-|   |          |\__/,|   (`\
- * {   |   |          |o o  |__ _) )
- * "-.|___|        _.( T   )  `  /
- * .--'-`-.     _((_ `^--' /_<  \
- * .+|______|__.-||__)`-'(((/  (((/
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.usernameET)
     EditText usernameEditText;
 
+    /**
+     * If you want to know more about Butter Knife, please, see the link I left at the build.gradle
+     * file.
+     */
     @BindView(R.id.passwordET)
     EditText passwordEditText;
 
@@ -58,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         // You need this line on your activity so Butter Knife knows what Activity-View we are referencing
         ButterKnife.bind(this);
 
-
+        // A reference to the toolbar, that way we can modify it as we please
         Toolbar toolbar = findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Start a new activity
         Intent intent = new Intent(this, MainActivity.class);
-
         startActivity(intent);
     }
 

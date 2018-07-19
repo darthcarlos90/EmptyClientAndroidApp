@@ -12,8 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import android.util.Log;
-import android.view.Menu;
+
+
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,36 +30,54 @@ import yourteamnumber.seshealthpatient.R;
 /**
  * Class: MainActivity
  * Extends:  {@link AppCompatActivity}
- * Author:  Lord Avinash <avinash.singh@uts.edu.au>. Carlos Tirado < Carlos.TiradoCorts@uts.edu.au>, and YOU!
+ * Author:  Carlos Tirado < Carlos.TiradoCorts@uts.edu.au>, and YOU!
  * Description:
  * <p>
  * For this project I encourage you to use Fragments. It is up to you to build up the app as
  * you want, but it will be a good practice to learn on how to use Fragments. A very good tutorial
- * on how to use fragments can be found on this site: http://www.vogella.com/tutorials/AndroidFragments/article.html
+ * on how to use fragments can be found on this site:
+ * http://www.vogella.com/tutorials/AndroidFragments/article.html
  * <p>
  * I basically chose to use fragments because of the design of the app, again, you can choose to change
  * completely the design of the app, but for this design specifically I will use Fragments.
  * <p>
- * ___
- * _.-|   |          |\__/,|   (`\
- * {   |   |          |o o  |__ _) )
- * "-.|___|        _.( T   )  `  /
- * .--'-`-.     _((_ `^--' /_<  \
- * .+|______|__.-||__)`-'(((/  (((/
  */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * A basic Drawer layout that helps you build the side menu. I followed the steps on how to
+     * build a menu from this site:
+     * https://developer.android.com/training/implementing-navigation/nav-drawer
+     * I recommend you to have a read of it if you need to do any changes to the code.
+     */
     private DrawerLayout mDrawerLayout;
+
+    /**
+     * A reference to the toolbar
+     */
     private Toolbar toolbar;
+
+    /**
+     * Helps to manage the fragment that is being used in the main view.
+     */
     private FragmentManager fragmentManager;
 
+    /**
+     * TAG to use
+     */
     private static String TAG = "MainActivity";
 
-
+    /**
+     * I am using this enum to know which is the current fragment being displayed, you will see
+     * what I mean with this later in this code.
+     */
     private enum MenuStates {
         PATIENT_INFO, DATA_PACKET, HEARTRATE, RECORD_VIDEO, SEND_FILE, NAVIGATION_MAP
     }
 
+    /**
+     * The current fragment being displayed.
+     */
     private MenuStates currentState;
 
 
@@ -68,18 +86,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // the default fragment on display is the patient information
         currentState = MenuStates.PATIENT_INFO;
 
+        // go look for the main drawer layout
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
+        // Set up the menu button
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        // Setup the navigation drawer, most of this code was taken from:
+        // https://developer.android.com/training/implementing-navigation/nav-drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -90,9 +113,13 @@ public class MainActivity extends AppCompatActivity {
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
+                        // Using a switch to see which item on the menu was clicked
                         switch (menuItem.getItemId()) {
+                            // You can find these id's at: res -> menu -> drawer_view.xml
                             case R.id.nav_patient_info:
+                                // If the user clicked on a different item than the current item
                                 if (currentState != MenuStates.PATIENT_INFO) {
+                                    // change the fragment to the new fragment
                                     ChangeFragment(new PatientInformationFragment());
                                     currentState = MenuStates.PATIENT_INFO;
                                 }
@@ -133,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
+        // If you need to listen to specific events from the drawer layout.
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     @Override
@@ -168,7 +195,9 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-
+    /**
+     * Called when one of the items in the toolbar was clicked, in this case, the menu button.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -188,6 +217,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(newTitle);
     }
 
+
+    /**
+     * This function allows to change the content of the Fragment holder
+     * @param fragment The fragment to be displayed
+     */
     private void ChangeFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);

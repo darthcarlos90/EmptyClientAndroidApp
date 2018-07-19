@@ -22,12 +22,7 @@ import yourteamnumber.seshealthpatient.R;
  * This fragment's job will be that to display patients information, and be able to edit that
  * information (either edit it in this fragment or a new fragment, up to you!)
  * <p>
- * ___
- * _.-|   |          |\__/,|   (`\
- * {   |   |          |o o  |__ _) )
- * "-.|___|        _.( T   )  `  /
- * .--'-`-.     _((_ `^--' /_<  \
- * .+|______|__.-||__)`-'(((/  (((/
+
  */
 public class PatientInformationFragment extends Fragment {
 
@@ -53,7 +48,6 @@ public class PatientInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View v = inflater.inflate(R.layout.fragment_patient_information, container, false);
 
         // Note how we are telling butter knife to bind during the on create view method
